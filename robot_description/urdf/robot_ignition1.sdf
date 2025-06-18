@@ -1,0 +1,946 @@
+<sdf version='1.9'>
+  <model name='robot_description'>
+    <link name='base_link'>
+      <inertial>
+        <pose>0.1780559729414199 -1.243941050198591e-05 0.4466954508265594 0 0 0</pose>
+        <mass>10.021246584</mass>
+        <inertia>
+          <ixx>0.57353490040801036</ixx>
+          <ixy>1.20848873026793e-05</ixy>
+          <ixz>0.0022778695219971561</ixz>
+          <iyy>0.57402618883127721</iyy>
+          <iyz>4.8841728212682492e-05</iyz>
+          <izz>0.27587865607071232</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_fixed_joint_lump__chassis_collision'>
+        <pose>0.1775 0 0.4475 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.405 0.405 0.72</size>
+          </box>
+        </geometry>
+      </collision>
+      <collision name='base_link_fixed_joint_lump__caster_wheel_collision_1'>
+        <pose>0.45 0.2225 0.02000000000000001 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.02</radius>
+          </sphere>
+        </geometry>
+      </collision>
+      <collision name='base_link_fixed_joint_lump__caster_wheel2_collision_2'>
+        <pose>0.45 -0.2225 0.02000000000000001 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.02</radius>
+          </sphere>
+        </geometry>
+      </collision>
+      <collision name='base_link_fixed_joint_lump__robot_link0_collision_3'>
+        <pose>0.275 -0.1 0.8385 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.062</length>
+            <radius>0.080000000000000002</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='base_link_fixed_joint_lump__chassis_visual'>
+        <pose>0.1775 0 0.4475 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.405 0.405 0.72</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>1 0.375 0.125 1</diffuse>
+          <ambient>1 0.375 0.125 1</ambient>
+        </material>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__caster_wheel_visual_1'>
+        <pose>0.45 0.2225 0.02000000000000001 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.02</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__caster_wheel2_visual_2'>
+        <pose>0.45 -0.2225 0.02000000000000001 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.02</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__robot_link0_visual_3'>
+        <pose>0.275 -0.1 0.8385 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.062</length>
+            <radius>0.080000000000000002</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <diffuse>0.941175 0.941175 0.941175 1</diffuse>
+          <ambient>0.941175 0.941175 0.941175 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='robot_joint1' type='revolute'>
+      <pose relative_to='base_link'>0.275 -0.1 0.8695000000000001 0 0 0</pose>
+      <parent>base_link</parent>
+      <child>robot_link1</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1.570796326794897</lower>
+          <upper>1.570796326794897</upper>
+          <effort>100</effort>
+          <velocity>100</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+          <damping>5.75</damping>
+          <friction>3.48</friction>          
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='robot_link1'>
+      <gravity>true</gravity>
+      <pose relative_to='robot_joint1'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0.08275 0 0 0</pose>
+        <mass>0.0033275750000000002</mass>
+        <inertia>
+          <ixx>1.291937926197917e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.291937926197917e-05</iyy>
+          <iyz>0</iyz>
+          <izz>1.064824e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='robot_link1_collision'>
+        <pose>0 0 0.08275 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.16550000000000001</length>
+            <radius>0.080000000000000002</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='robot_link1_visual'>
+        <pose>0 0 0.08275 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.16550000000000001</length>
+            <radius>0.080000000000000002</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <diffuse>0.941175 0.941175 0.941175 1</diffuse>
+          <ambient>0.941175 0.941175 0.941175 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='robot_joint2' type='revolute'>
+      <pose relative_to='robot_link1'>0 0 0.1655 0 0 0</pose>
+      <parent>robot_link1</parent>
+      <child>robot_link2</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1.570796327</lower>
+          <upper>1.570796327</upper>
+          <effort>5</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+          <damping>5.75</damping>
+          <friction>3.48</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='robot_link2'>
+      <gravity>true</gravity>
+      <pose relative_to='robot_joint2'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0.1101 0 0 0</pose>
+        <mass>0.0039893990000000002</mass>
+        <inertia>
+          <ixx>2.214289318956667e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.214289318956667e-05</iyy>
+          <iyz>0</iyz>
+          <izz>1.2046096664473331e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='robot_link2_collision'>
+        <pose>0 0 0.1101 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1346 0.1346 0.2202</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='robot_link2_visual'>
+        <pose>0 0 0.1101 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1346 0.1346 0.2202</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.941175 0.941175 0.941175 1</diffuse>
+          <ambient>0.941175 0.941175 0.941175 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='robot_joint3' type='revolute'>
+      <pose relative_to='robot_link2'>0 0 0.2202 0 0 0</pose>
+      <parent>robot_link2</parent>
+      <child>robot_link3</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1.6499999999999999</lower>
+          <upper>1.6499999999999999</upper>
+          <effort>5</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+          <damping>5.75</damping>
+          <friction>3.48</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='robot_link3'>
+      <gravity>true</gravity>
+      <pose relative_to='robot_joint3'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0.06494999999999999 0 0 0</pose>
+        <mass>0.000957623</mass>
+        <inertia>
+          <ixx>2.066790637769167e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.827126329559166e-06</iyy>
+          <iyz>0</iyz>
+          <izz>1.2007602876233331e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='robot_link3_collision'>
+        <pose>0 0 0.06494999999999999 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.0776 0.095 0.1299</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='robot_link3_visual'>
+        <pose>0 0 0.06494999999999999 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.0776 0.095 0.1299</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.941175 0.941175 0.941175 1</diffuse>
+          <ambient>0.941175 0.941175 0.941175 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='robot_joint4' type='revolute'>
+      <pose relative_to='robot_link3'>0 0 0.1299 0 0 0</pose>
+      <parent>robot_link3</parent>
+      <child>robot_link4</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-3.1400000000000001</lower>
+          <upper>3.1400000000000001</upper>
+          <effort>5</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+          <damping>5.75</damping>
+          <friction>3.48</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='robot_link4'>
+      <gravity>true</gravity>
+      <pose relative_to='robot_joint4'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0.04745 0 0 0</pose>
+        <mass>0.00060795700000000001</mass>
+        <inertia>
+          <ixx>8.5847682772833327e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>7.1818061736166661e-07</iyy>
+          <iyz>0</iyz>
+          <izz>6.6411297482833318e-07</izz>
+        </inertia>
+      </inertial>
+      <collision name='robot_link4_collision'>
+        <pose>0 0 0.04745 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.0719 0.0891 0.0949</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='robot_link4_visual'>
+        <pose>0 0 0.04745 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.0719 0.0891 0.0949</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.36765 0.36765 0.36765 1</diffuse>
+          <ambient>0.36765 0.36765 0.36765 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='robot_joint5' type='revolute'>
+      <pose relative_to='robot_link4'>0 0 0.0949 0 0 0</pose>
+      <parent>robot_link4</parent>
+      <child>robot_link5</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1.570796327</lower>
+          <upper>1.570796327</upper>
+          <effort>5</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+          <damping>5.75</damping>
+          <friction>3.48</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='robot_link5'>
+      <gravity>true</gravity>
+      <pose relative_to='robot_joint5'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0.0255 0 0 0</pose>
+        <mass>0.00017136000000000001</mass>
+        <inertia>
+          <ixx>1.0711428e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>7.0043399999999996e-08</iyy>
+          <iyz>0</iyz>
+          <izz>1.0287312e-07</izz>
+        </inertia>
+      </inertial>
+      <collision name='robot_link5_collision'>
+        <pose>0 0 0.0255 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.048 0.07 0.051</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='robot_link5_visual'>
+        <pose>0 0 0.0255 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.048 0.07 0.051</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.9902 1 1 1</diffuse>
+          <ambient>0.9902 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='robot_joint6' type='revolute'>
+      <pose relative_to='robot_link5'>0 0 0.051 0 0 0</pose>
+      <parent>robot_link5</parent>
+      <child>robot_link6</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-3</lower>
+          <upper>3</upper>
+          <effort>5</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+          <damping>5.75</damping>
+          <friction>3.48</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='robot_link6'>
+      <gravity>true</gravity>
+      <pose relative_to='robot_joint6'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0.0245 0 0 0</pose>
+        <mass>0.000151743</mass>
+        <inertia>
+          <ixx>6.0722490500000012e-08</ixx>
+          <ixy>-4.1322064518930943e-18</ixy>
+          <ixz>0</ixz>
+          <iyy>8.086940861000002e-08</iyy>
+          <iyz>0</iyz>
+          <izz>8.0869408610000007e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='robot_link6_fixed_joint_lump__robot_hand_collision'>
+        <pose>0 0 0.0245 0 0 1.570796327</pose>
+        <geometry>
+          <box>
+            <size>0.049 0.0632 0.049</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='robot_link6_fixed_joint_lump__robot_hand_visual'>
+        <pose>0 0 0.0245 0 0 1.570796327</pose>
+        <geometry>
+          <box>
+            <size>0.049 0.0632 0.049</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.9902 1 1 1</diffuse>
+          <ambient>0.9902 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='Pivot_Arm_Gripper_Idol_Joint' type='revolute'>
+      <pose relative_to='robot_link6'>0.006999999999999999 1.435723935572231e-12 0.0415 0 0 1.570796327</pose>
+      <parent>robot_link6</parent>
+      <child>Pivot_Arm_Gripper_Idol</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1.5707</lower>
+          <upper>1.5707</upper>
+          <effort>5</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+          <damping>5.75</damping>
+          <friction>3.48</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='Pivot_Arm_Gripper_Idol'>
+      <gravity>true</gravity>
+      <pose relative_to='Pivot_Arm_Gripper_Idol_Joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0.01995 0 0 0</pose>
+        <mass>1.4360000000000001e-06</mass>
+        <inertia>
+          <ixx>1.9481853e-10</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.9481853e-10</iyy>
+          <iyz>0</iyz>
+          <izz>8.6159999999999996e-12</izz>
+        </inertia>
+      </inertial>
+      <collision name='Pivot_Arm_Gripper_Idol_collision'>
+        <pose>0 0 0.01995 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.006 0.006 0.0399</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='Pivot_Arm_Gripper_Idol_visual'>
+        <pose>0 0 0.01995 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.006 0.006 0.0399</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.9902 1 1 1</diffuse>
+          <ambient>0.9902 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='Pivot_Arm_Gripper_Servo_Joint' type='revolute'>
+      <pose relative_to='robot_link6'>-0.006999999999999999 -1.435723935572231e-12 0.0415 0 0 1.570796327</pose>
+      <parent>robot_link6</parent>
+      <child>Pivot_Arm_Gripper_Servo</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1.5707</lower>
+          <upper>1.5707</upper>
+          <effort>5</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+          <damping>5.75</damping>
+          <friction>3.48</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='Pivot_Arm_Gripper_Servo'>
+      <gravity>true</gravity>
+      <pose relative_to='Pivot_Arm_Gripper_Servo_Joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0.01995 0 0 0</pose>
+        <mass>1.4360000000000001e-06</mass>
+        <inertia>
+          <ixx>1.9481853e-10</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.9481853e-10</iyy>
+          <iyz>0</iyz>
+          <izz>8.6159999999999996e-12</izz>
+        </inertia>
+      </inertial>
+      <collision name='Pivot_Arm_Gripper_Servo_collision'>
+        <pose>0 0 0.01995 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.006 0.006 0.0399</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='Pivot_Arm_Gripper_Servo_visual'>
+        <pose>0 0 0.01995 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.006 0.006 0.0399</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.9902 1 1 1</diffuse>
+          <ambient>0.9902 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='robot_finger_joint1' type='revolute'>
+      <pose relative_to='robot_link6'>-0.014 -2.871447871144461e-12 0.022 0 0 1.570796327</pose>
+      <parent>robot_link6</parent>
+      <child>Gripper_Servo_Gear</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1.5707</lower>
+          <upper>0</upper>
+          <effort>5</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+          <damping>5.75</damping>
+          <friction>3.48</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='Gripper_Servo_Gear'>
+      <gravity>true</gravity>
+      <pose relative_to='robot_finger_joint1'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0.01995 0 0 0</pose>
+        <mass>1.4360000000000001e-06</mass>
+        <inertia>
+          <ixx>1.9481853e-10</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.9481853e-10</iyy>
+          <iyz>0</iyz>
+          <izz>8.6159999999999996e-12</izz>
+        </inertia>
+      </inertial>
+      <collision name='Gripper_Servo_Gear_collision'>
+        <pose>0 0 0.01995 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.006 0.006 0.0399</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='Gripper_Servo_Gear_visual'>
+        <pose>0 0 0.01995 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.006 0.006 0.0399</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>1 0.553925 0.0392163 1</diffuse>
+          <ambient>1 0.553925 0.0392163 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='Tip_Gripper_Servo_Joint' type='revolute'>
+      <pose relative_to='Gripper_Servo_Gear'>0 0 0.04 0 0 0</pose>
+      <parent>Gripper_Servo_Gear</parent>
+      <child>robot_rightfinger</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1.5707</lower>
+          <upper>1.5707</upper>
+          <effort>5</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+          <damping>5.75</damping>
+          <friction>3.48</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='robot_rightfinger'>
+      <gravity>true</gravity>
+      <pose relative_to='Tip_Gripper_Servo_Joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0.003 0.035 0 0 0</pose>
+        <mass>2.6460000000000001e-05</mass>
+        <inertia>
+          <ixx>1.1776905e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.151892e-08</iyy>
+          <iyz>0</iyz>
+          <izz>1.6868249999999999e-09</izz>
+        </inertia>
+      </inertial>
+      <collision name='robot_rightfinger_collision'>
+        <pose>0 -0.003 0.035 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.018 0.021 0.07</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='robot_rightfinger_visual'>
+        <pose>0 -0.003 0.035 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.018 0.021 0.07</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0 1 0 1</diffuse>
+          <ambient>0 1 0 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='robot_finger_joint2' type='revolute'>
+      <pose relative_to='robot_link6'>0.014 2.871447871144461e-12 0.022 0 0 1.570796327</pose>
+      <parent>robot_link6</parent>
+      <child>Gripper_Idol_Gear</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1.5707</lower>
+          <upper>1.5707</upper>
+          <effort>5</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+          <damping>5.75</damping>
+          <friction>3.48</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='Gripper_Idol_Gear'>
+      <gravity>true</gravity>
+      <pose relative_to='robot_finger_joint2'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0.01995 0 0 0</pose>
+        <mass>1.4360000000000001e-06</mass>
+        <inertia>
+          <ixx>1.9481853e-10</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.9481853e-10</iyy>
+          <iyz>0</iyz>
+          <izz>8.6159999999999996e-12</izz>
+        </inertia>
+      </inertial>
+      <collision name='Gripper_Idol_Gear_collision'>
+        <pose>0 0 0.01995 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.006 0.006 0.0399</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='Gripper_Idol_Gear_visual'>
+        <pose>0 0 0.01995 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.006 0.006 0.0399</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.07353 0.808825 1 1</diffuse>
+          <ambient>0.07353 0.808825 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='Tip_Gripper_Idol_Joint' type='revolute'>
+      <pose relative_to='Gripper_Idol_Gear'>0 0 0.04 0 0 0</pose>
+      <parent>Gripper_Idol_Gear</parent>
+      <child>robot_leftfinger</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1.5707</lower>
+          <upper>1.5707</upper>
+          <effort>5</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+          <damping>5.75</damping>
+          <friction>3.48</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='robot_leftfinger'>
+      <gravity>true</gravity>
+      <pose relative_to='Tip_Gripper_Idol_Joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0.035 0 0 0</pose>
+        <mass>2.6460000000000001e-05</mass>
+        <inertia>
+          <ixx>1.1776905e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.151892e-08</iyy>
+          <iyz>0</iyz>
+          <izz>1.6868249999999999e-09</izz>
+        </inertia>
+      </inertial>
+      <collision name='robot_leftfinger_collision'>
+        <pose>0 0.003 0.035 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.018 0.021 0.07</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='robot_leftfinger_visual'>
+        <pose>0 0.003 0.035 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.018 0.021 0.07</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>1 0 0 1</diffuse>
+          <ambient>1 0 0 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='left_wheel_joint' type='revolute'>
+      <pose relative_to='base_link'>0 0.2225 0.0625 -1.570796326794896 0 0</pose>
+      <parent>base_link</parent>
+      <child>left_wheel</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-10000000000000000</lower>
+          <upper>10000000000000000</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+          <damping>21.75</damping>
+          <friction>3.48</friction>          
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='left_wheel'>
+      <pose relative_to='left_wheel_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.050000000000000003</mass>
+        <inertia>
+          <ixx>5.2578124999999999e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>5.2578124999999999e-05</iyy>
+          <iyz>0</iyz>
+          <izz>9.7656250000000005e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='left_wheel_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.0625</radius>
+          </sphere>
+        </geometry>
+      </collision>
+      <visual name='left_wheel_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.029999999999999999</length>
+            <radius>0.0625</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <diffuse>0.25 0.25 1 1</diffuse>
+          <ambient>0.25 0.25 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='right_wheel_joint' type='revolute'>
+      <pose relative_to='base_link'>0 -0.2225 0.0625 1.570796326794896 0 0</pose>
+      <parent>base_link</parent>
+      <child>right_wheel</child>
+      <axis>
+        <xyz>0 0 -1</xyz>
+        <limit>
+          <lower>-10000000000000000</lower>
+          <upper>10000000000000000</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+          <damping>21.75</damping>
+          <friction>3.48</friction>          
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='right_wheel'>
+      <pose relative_to='right_wheel_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.050000000000000003</mass>
+        <inertia>
+          <ixx>5.2578124999999999e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>5.2578124999999999e-05</iyy>
+          <iyz>0</iyz>
+          <izz>9.7656250000000005e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='right_wheel_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.0625</radius>
+          </sphere>
+        </geometry>
+      </collision>
+      <visual name='right_wheel_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.029999999999999999</length>
+            <radius>0.0625</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <diffuse>0.25 0.25 1 1</diffuse>
+          <ambient>0.25 0.25 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <frame name='base_footprint_joint' attached_to='base_link'>
+      <pose>0 0 0 0 -0 0</pose>
+    </frame>
+    <frame name='base_footprint' attached_to='base_footprint_joint'/>
+    <frame name='caster_wheel_joint' attached_to='chassis'>
+      <pose>0.475 0.2225 -0.0675 0 -0 0</pose>
+    </frame>
+    <frame name='caster_wheel' attached_to='caster_wheel_joint'/>
+    <frame name='caster_wheel_joint2' attached_to='chassis'>
+      <pose>0.475 -0.2225 -0.0675 0 -0 0</pose>
+    </frame>
+    <frame name='caster_wheel2' attached_to='caster_wheel_joint2'/>
+    <frame name='robot_joint0' attached_to='chassis'>
+      <pose>0.3 -0.1 0.72 0 -0 0</pose>
+    </frame>
+    <frame name='robot_link0' attached_to='robot_joint0'/>
+    <frame name='robot_camera_joint' attached_to='robot_hand'>
+      <pose>0.0645 0 0.0685 0 -0 1.5708</pose>
+    </frame>
+    <frame name='robot_camera' attached_to='robot_camera_joint'/>
+    <frame name='robot_hand_joint' attached_to='robot_link7'>
+      <pose>0 0 0 0 -0 1.5708</pose>
+    </frame>
+    <frame name='robot_hand' attached_to='robot_hand_joint'/>
+    <frame name='robot_joint7' attached_to='robot_link6'>
+      <pose>0 0 0 0 -0 0</pose>
+    </frame>
+    <frame name='robot_link7' attached_to='robot_joint7'/>
+    <frame name='chassis_joint' attached_to='floor'>
+      <pose>-0.025 0 0.025 0 -0 0</pose>
+    </frame>
+    <frame name='chassis' attached_to='chassis_joint'/>
+    <frame name='floor_joint' attached_to='base_link'>
+      <pose>0 0 0.0625 0 -0 0</pose>
+    </frame>
+    <frame name='floor' attached_to='floor_joint'/>
+
+    <!-- Odometry Plugin -->
+    <plugin
+      filename="ignition-gazebo-odometry-publisher-system"
+      name="ignition::gazebo::systems::OdometryPublisher">
+      <odom_publish_frequency>50</odom_publish_frequency>
+      <odom_topic>/odom</odom_topic>
+      <odom_frame>odom</odom_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+    </plugin>
+    
+    <!-- Diff Drive Plugin -->
+    <plugin filename="libignition-gazebo-diff-drive-system.so" name="ignition::gazebo::systems::DiffDrive">
+      <left_joint>left_wheel_joint</left_joint>
+      <right_joint>right_wheel_joint</right_joint>
+      <wheel_separation>0.445</wheel_separation>
+      <wheel_radius>0.0625</wheel_radius>
+      <odom_publish_frequency>0</odom_publish_frequency>
+      <topic>cmd_vel</topic>
+      <frame_id>odom_diff</frame_id>
+      <child_frame_id>base_footprint</child_frame_id>
+    </plugin>
+
+    <!-- Joint state publisher -->
+    <plugin filename="libignition-gazebo-joint-state-publisher-system.so" name="ignition::gazebo::systems::JointStatePublisher">
+    </plugin>
+
+
+  </model>
+</sdf>

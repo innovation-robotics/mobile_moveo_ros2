@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot_description">
+
+  <gazebo>
+
+    <!-- Odometry Publisher -->
+    <plugin filename="ignition-gazebo-odometry-publisher-system" name="ignition::gazebo::systems::OdometryPublisher">
+      <odom_publish_frequency>50</odom_publish_frequency>
+      <odom_topic>/odom</odom_topic>
+      <odom_frame>odom</odom_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+      <dimensions>3</dimensions>
+    </plugin>
+
+    <!-- Joint States -->
+    <plugin filename="libignition-gazebo-joint-state-publisher-system.so" name="ignition::gazebo::systems::JointStatePublisher"/>
+
+    <!-- Diff Drive -->
+    <plugin filename="libignition-gazebo-diff-drive-system.so" name="ignition::gazebo::systems::DiffDrive">
+      <left_joint>left_wheel_joint</left_joint>
+      <right_joint>right_wheel_joint</right_joint>
+      <wheel_separation>0.445</wheel_separation>
+      <wheel_radius>0.0625</wheel_radius>
+      <odom_publish_frequency>0</odom_publish_frequency>
+      <topic>cmd_vel</topic>
+      <frame_id>odom_diff</frame_id>
+      <child_frame_id>base_footprint</child_frame_id>
+    </plugin>
+
+    <!-- Joint Trajectories -->
+    <plugin filename="libignition-gazebo-joint-trajectory-controller-system.so" name="ignition::gazebo::systems::JointTrajectoryController">
+      
+      <topic>joint_trajectory</topic>
+
+      <joint_name>robot_joint1</joint_name>
+      <initial_position>0</initial_position>
+      <position_p_gain>1.0</position_p_gain>
+      <position_d_gain>0.01</position_d_gain>
+      <position_i_gain>0.1</position_i_gain>
+      <position_i_min>-0.2</position_i_min>
+      <position_i_max>0.2</position_i_max>
+      <position_cmd_min>-100</position_cmd_min>
+      <position_cmd_max>100</position_cmd_max>
+
+      <joint_name>robot_joint2</joint_name>
+      <initial_position>0</initial_position>
+      <position_p_gain>1.0</position_p_gain>
+      <position_d_gain>0.01</position_d_gain>
+      <position_i_gain>0.1</position_i_gain>
+      <position_i_min>-0.2</position_i_min>
+      <position_i_max>0.2</position_i_max>
+      <position_cmd_min>-100</position_cmd_min>
+      <position_cmd_max>100</position_cmd_max>
+
+      <joint_name>robot_joint3</joint_name>
+      <initial_position>0</initial_position>
+      <position_p_gain>1.0</position_p_gain>
+      <position_d_gain>0.01</position_d_gain>
+      <position_i_gain>0.1</position_i_gain>
+      <position_i_min>-0.2</position_i_min>
+      <position_i_max>0.2</position_i_max>
+      <position_cmd_min>-100</position_cmd_min>
+      <position_cmd_max>100</position_cmd_max>
+
+      <joint_name>robot_joint4</joint_name>
+      <initial_position>0</initial_position>
+      <position_p_gain>1.0</position_p_gain>
+      <position_d_gain>0.01</position_d_gain>
+      <position_i_gain>0.1</position_i_gain>
+      <position_i_min>-0.2</position_i_min>
+      <position_i_max>0.2</position_i_max>
+      <position_cmd_min>-100</position_cmd_min>
+      <position_cmd_max>100</position_cmd_max>
+
+      <joint_name>robot_joint5</joint_name>
+      <initial_position>0</initial_position>
+      <position_p_gain>1.0</position_p_gain>
+      <position_d_gain>0.01</position_d_gain>
+      <position_i_gain>0.1</position_i_gain>
+      <position_i_min>-0.2</position_i_min>
+      <position_i_max>0.2</position_i_max>
+      <position_cmd_min>-100</position_cmd_min>
+      <position_cmd_max>100</position_cmd_max>
+
+      <joint_name>robot_joint6</joint_name>
+      <initial_position>0</initial_position>
+      <position_p_gain>1.0</position_p_gain>
+      <position_d_gain>0.01</position_d_gain>
+      <position_i_gain>0.1</position_i_gain>
+      <position_i_min>-0.2</position_i_min>
+      <position_i_max>0.2</position_i_max>
+      <position_cmd_min>-100</position_cmd_min>
+      <position_cmd_max>100</position_cmd_max>
+
+      <joint_name>robot_finger_joint1</joint_name>
+      <initial_position>0</initial_position>
+      <position_p_gain>1.0</position_p_gain>
+      <position_d_gain>0.01</position_d_gain>
+      <position_i_gain>0.1</position_i_gain>
+      <position_i_min>-0.2</position_i_min>
+      <position_i_max>0.2</position_i_max>
+      <position_cmd_min>-100</position_cmd_min>
+      <position_cmd_max>100</position_cmd_max>
+
+      <joint_name>robot_finger_joint2</joint_name>
+      <initial_position>0</initial_position>
+      <position_p_gain>1.0</position_p_gain>
+      <position_d_gain>0.01</position_d_gain>
+      <position_i_gain>0.1</position_i_gain>
+      <position_i_min>-0.2</position_i_min>
+      <position_i_max>0.2</position_i_max>
+      <position_cmd_min>-100</position_cmd_min>
+      <position_cmd_max>100</position_cmd_max>
+
+      <joint_name>Tip_Gripper_Servo_Joint</joint_name>
+      <initial_position>0</initial_position>
+      <position_p_gain>1.0</position_p_gain>
+      <position_d_gain>0.01</position_d_gain>
+      <position_i_gain>0.1</position_i_gain>
+      <position_i_min>-0.2</position_i_min>
+      <position_i_max>0.2</position_i_max>
+      <position_cmd_min>-100</position_cmd_min>
+      <position_cmd_max>100</position_cmd_max>
+
+      <joint_name>Tip_Gripper_Idol_Joint</joint_name>
+      <initial_position>0</initial_position>
+      <position_p_gain>1.0</position_p_gain>
+      <position_d_gain>0.01</position_d_gain>
+      <position_i_gain>0.1</position_i_gain>
+      <position_i_min>-0.2</position_i_min>
+      <position_i_max>0.2</position_i_max>
+      <position_cmd_min>-100</position_cmd_min>
+      <position_cmd_max>100</position_cmd_max>
+
+    </plugin>
+
+  </gazebo>
+
+</robot>

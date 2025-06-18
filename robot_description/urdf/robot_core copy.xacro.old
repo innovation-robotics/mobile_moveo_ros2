@@ -1,0 +1,964 @@
+<?xml version='1.0'?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >	
+
+    <xacro:include filename="inertial_macros.xacro"/>
+
+
+    <xacro:property name="chassis_length" value="0.405"/>
+    <xacro:property name="chassis_width" value="0.405"/>
+    <xacro:property name="chassis_height" value="0.720"/>
+    <xacro:property name="chassis_mass" value="1.0"/>
+    <xacro:property name="wheel_radius" value="0.0625"/>
+    <xacro:property name="wheel_thickness" value="0.030"/>
+    <xacro:property name="wheel_mass" value="0.05"/>
+    <xacro:property name="wheel_offset_x" value="0.025"/>
+    <xacro:property name="wheel_offset_y" value="0.2225"/>
+    <xacro:property name="wheel_offset_z" value="-0.025"/>
+    <xacro:property name="caster_wheel_radius" value="0.02"/>
+    <xacro:property name="caster_wheel_mass" value="0.01"/>
+    <xacro:property name="caster_wheel_offset_x" value="0.475"/>
+    <xacro:property name="caster_wheel_offset_y" value="0.2225"/>
+    <xacro:property name="caster_wheel_offset_z" value="${wheel_offset_z - wheel_radius + caster_wheel_radius}"/>
+
+    <xacro:property name="link_0_radius" value="0.08"/>
+    <xacro:property name="link_0_height" value="0.062"/>
+
+    <xacro:property name="link_1_radius" value="0.08"/>
+    <xacro:property name="link_1_height" value="0.1655"/>
+
+    <xacro:property name="link_2_width" value="0.1346"/>
+    <xacro:property name="link_2_length" value="0.1346"/>
+    <xacro:property name="link_2_height" value="0.2202"/>
+
+    <xacro:property name="link_3_width" value="0.0776"/>
+    <xacro:property name="link_3_length" value="0.095"/>
+    <xacro:property name="link_3_height" value="0.1299"/>
+
+    <xacro:property name="link_4_width" value="0.0719"/>
+    <xacro:property name="link_4_length" value="0.0891"/>
+    <xacro:property name="link_4_height" value="0.0949"/>
+
+    <xacro:property name="link_5_width" value="0.048"/>
+    <xacro:property name="link_5_length" value="0.0700"/>
+    <xacro:property name="link_5_height" value="0.0510"/>
+
+    <xacro:property name="hand_width" value="0.049"/>
+    <xacro:property name="hand_length" value="0.0632"/>
+    <xacro:property name="hand_height" value="0.0490"/>
+
+    <xacro:property name="gripper_servo_gear_width" value="0.006"/>
+    <xacro:property name="gripper_servo_gear_length" value="0.006"/>
+    <xacro:property name="gripper_servo_gear_height" value="0.0399"/>
+
+    <xacro:property name="tip_gripper_servo_width" value="0.018"/>
+    <xacro:property name="tip_gripper_servo_length" value="0.021"/>
+    <xacro:property name="tip_gripper_servo_height" value="0.07"/>
+
+    <xacro:property name="pivot_arm_gripper_servo_width" value="0.006"/>
+    <xacro:property name="pivot_arm_gripper_servo_length" value="0.006"/>
+    <xacro:property name="pivot_arm_gripper_servo_height" value="0.0399"/>
+
+    <xacro:property name="gripper_idol_gear_width" value="0.006"/>
+    <xacro:property name="gripper_idol_gear_length" value="0.006"/>
+    <xacro:property name="gripper_idol_gear_height" value="0.0399"/>
+
+    <xacro:property name="tip_gripper_idol_width" value="0.018"/>
+    <xacro:property name="tip_gripper_idol_length" value="0.021"/>
+    <xacro:property name="tip_gripper_idol_height" value="0.07"/>
+
+    <xacro:property name="pivot_arm_gripper_idol_width" value="0.006"/>
+    <xacro:property name="pivot_arm_gripper_idol_length" value="0.006"/>
+    <xacro:property name="pivot_arm_gripper_idol_height" value="0.0399"/>
+
+    <material name="white">
+        <color rgba="1 1 1 1" />
+    </material>
+
+    <material name="orange">
+        <color rgba="1 0.3 0.1 1"/>
+    </material>
+
+    <material name="blue">
+        <color rgba="0.2 0.2 1 1"/>
+    </material>
+
+    <material name="black">
+        <color rgba="0 0 0 1"/>
+    </material>
+
+    <material name="red">
+        <color rgba="1 0 0 1"/>
+    </material>
+
+    <!-- BASE LINK -->
+
+    <link name="base_link"></link>
+
+    <!-- BASE_FOOTPRINT LINK -->
+
+    <!-- <joint name="base_footprint_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="base_footprint"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <link name="base_footprint">
+    </link> -->
+
+
+    <!-- CHASSIS LINK -->
+
+    <joint name="chassis_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="chassis"/>
+        <origin xyz="${-wheel_offset_x} 0 ${-wheel_offset_z}"/>
+    </joint>
+
+    <link name="chassis">
+        <visual>
+            <origin xyz="${chassis_length/2} 0 ${chassis_height/2}"/>
+            <geometry>
+                <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+            </geometry>
+            <material name="orange"/>
+        </visual>
+        <collision>
+            <origin xyz="${chassis_length/2} 0 ${chassis_height/2}"/>
+            <geometry>
+                <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_box mass="10.0" x="${chassis_length}" y="${chassis_width}" z="${chassis_height}">
+            <origin xyz="${chassis_length/2} 0 ${chassis_height/2}" rpy="0 0 0"/>
+        </xacro:inertial_box>
+    </link>
+
+    <!-- LEFT WHEEL LINK -->
+
+    <joint name="left_wheel_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="left_wheel"/>
+        <origin xyz="0 ${wheel_offset_y} 0" rpy="-${pi/2} 0 0" />
+        <axis xyz="0 0 1"/>
+        <!-- <dynamics damping="10.0" friction="10.0"/> -->
+    </joint>
+
+    <link name="left_wheel">
+        <visual>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_thickness}"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+        <collision>
+            <geometry>
+                <sphere radius="${wheel_radius}"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_cylinder mass="${wheel_mass}" length="${wheel_thickness}" radius="${wheel_radius}">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_cylinder>
+    </link>
+
+    <!-- RIGHT WHEEL LINK -->
+
+    <joint name="right_wheel_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="right_wheel"/>
+        <origin xyz="0 ${-wheel_offset_y} 0" rpy="${pi/2} 0 0" />
+        <axis xyz="0 0 -1"/>
+        <!-- <dynamics damping="10.0" friction="10.0"/> -->
+    </joint>
+
+    <link name="right_wheel">
+        <visual>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_thickness}"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+        <collision>
+            <geometry>
+                <sphere radius="${wheel_radius}"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_cylinder mass="${wheel_mass}" length="${wheel_thickness}" radius="${wheel_radius}">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_cylinder>
+    </link>
+
+    <!-- CASTER WHEEL LINK -->
+
+    <joint name="caster_wheel_joint" type="fixed">
+        <parent link="chassis"/>
+        <child link="caster_wheel"/>
+        <origin xyz="${caster_wheel_offset_x} ${caster_wheel_offset_y} ${caster_wheel_offset_z}"/>
+    </joint>
+
+
+    <link name="caster_wheel">
+        <visual>
+            <geometry>
+                <sphere radius="${caster_wheel_radius}"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+        <collision>
+            <geometry>
+                <sphere radius="${caster_wheel_radius}"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_sphere mass="${caster_wheel_mass}" radius="${caster_wheel_radius}">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_sphere>
+    </link>
+
+    <joint name="caster_wheel_joint2" type="fixed">
+        <parent link="chassis"/>
+        <child link="caster_wheel2"/>
+        <origin xyz="${caster_wheel_offset_x} ${-caster_wheel_offset_y} ${caster_wheel_offset_z}"/>
+    </joint>
+
+    <link name="caster_wheel2">
+        <visual>
+            <geometry>
+                <sphere radius="${caster_wheel_radius}"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+        <collision>
+            <geometry>
+                <sphere radius="${caster_wheel_radius}"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_sphere mass="${caster_wheel_mass}" radius="${caster_wheel_radius}">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_sphere>
+    </link>
+
+  <joint name="robot_joint0" type="fixed">
+    <origin rpy="0 0 0.0" xyz="0.3 -0.1 ${chassis_height}" />
+    <parent link="chassis"/>
+    <child link="robot_link0"/>
+  </joint>
+
+  <link
+    name="robot_link0">
+    <xacro:inertial_cylinder mass="0.001246584" length="${link_0_height}" radius="${link_0_radius}">
+        <origin xyz="0 0 ${link_0_height/2.0}" rpy="0 0 0"/>
+    </xacro:inertial_cylinder>
+    <visual>
+      <origin
+        xyz="0 0 ${link_0_height/2.0}"
+        rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="${link_0_radius}" length="${link_0_height}"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 ${link_0_height/2.0}"
+        rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="${link_0_radius}" length="${link_0_height}"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="robot_joint1" type="revolute">
+      <origin xyz="0 0 ${link_0_height}" rpy="0 0 0"/>
+      <parent link="robot_link0"/>
+      <child link="robot_link1"/>
+      <axis xyz="0 1 0"/>
+      <limit lower="${-pi/2.0}" upper="${pi/2.0}" velocity="100" effort="100"/> 
+      <!-- <dynamics damping="10.0" friction="10.0"/> -->
+  </joint>
+
+  <link
+    name="robot_link1">
+    <xacro:inertial_cylinder mass="0.003327575" length="${link_1_height}" radius="${link_1_radius}">
+        <origin xyz="0 0 ${link_1_height/2.0}" rpy="0 0 0"/>
+    </xacro:inertial_cylinder>
+    <visual>
+      <origin
+        xyz="0 0 ${link_1_height/2.0}"
+        rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="${link_1_radius}" length="${link_1_height}"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 ${link_1_height/2.0}"
+        rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="${link_1_radius}" length="${link_1_height}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <gazebo reference="robot_link1">
+      <material>Gazebo/Blue</material>
+  </gazebo>
+  
+
+  <link
+    name="robot_link2">
+    <xacro:inertial_box mass="0.003989399" x="${link_2_width}" y="${link_2_length}" z="${link_2_height}">
+        <origin xyz="0 0 ${link_2_height/2.0}" rpy="0 0 0"/>
+    </xacro:inertial_box>
+    <visual>
+      <origin
+        xyz="0 0 ${link_2_height/2.0}"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="${link_2_width} ${link_2_length} ${link_2_height}"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 ${link_2_height/2.0}"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="${link_2_width} ${link_2_length} ${link_2_height}"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint
+    name="robot_joint2"
+    type="revolute">
+    <origin
+      xyz="0 0 ${link_1_height}"
+      rpy="0 0 0" />
+    <parent
+      link="robot_link1" />
+    <child
+      link="robot_link2" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.570796327"
+      upper="1.570796327"
+      effort="5"
+      velocity="1" />
+    <!-- <dynamics damping="10.0" friction="10.0"/> -->
+  </joint>
+
+  <link
+    name="robot_link3">
+    <xacro:inertial_box mass="0.000957623" x="${link_3_width}" y="${link_3_length}" z="${link_3_height}">
+        <origin xyz="0 0 ${link_3_height/2.0}" rpy="0 0 0"/>
+    </xacro:inertial_box>
+    <visual>
+      <origin
+        xyz="0 0 ${link_3_height/2.0}"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="${link_3_width} ${link_3_length} ${link_3_height}"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 ${link_3_height/2.0}"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="${link_3_width} ${link_3_length} ${link_3_height}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint
+    name="robot_joint3"
+    type="revolute">
+    <origin
+      xyz="0 0 ${link_2_height}"
+      rpy="0 0 0" />
+    <parent
+      link="robot_link2" />
+    <child
+      link="robot_link3" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.65"
+      upper="1.65"
+      effort="5"
+      velocity="1" />
+    <!-- <dynamics damping="10.0" friction="10.0"/> -->
+  </joint>
+
+  <link
+    name="robot_link4">
+    <xacro:inertial_box mass="0.000607957" x="${link_4_width}" y="${link_4_length}" z="${link_4_height}">
+        <origin xyz="0 0 ${link_4_height/2}" rpy="0 0 0"/>
+    </xacro:inertial_box>
+    <visual>
+      <origin
+        xyz="0 0 ${link_4_height/2.0}"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="${link_4_width} ${link_4_length} ${link_4_height}"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.29412 0.29412 0.29412 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 ${link_4_height/2.0}"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="${link_4_width} ${link_4_length} ${link_4_height}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint
+    name="robot_joint4"
+    type="revolute">
+    <origin
+      xyz="0 0 ${link_3_height}"
+      rpy="0 0 0" />
+    <parent
+      link="robot_link3" />
+    <child
+      link="robot_link4" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="5"
+      velocity="1" />
+    <!-- <dynamics damping="10.0" friction="10.0"/> -->
+  </joint>
+
+  <link
+    name="robot_link5">
+    <xacro:inertial_box mass="0.00017136" x="${link_5_width}" y="${link_5_length}" z="${link_5_height}">
+        <origin xyz="0 0 ${link_5_height/2}" rpy="0 0 0"/>
+    </xacro:inertial_box>
+    <visual>
+      <origin
+        xyz="0 0 ${link_5_height/2.0}"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="${link_5_width} ${link_5_length} ${link_5_height}"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 ${link_5_height/2.0}"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="${link_5_width} ${link_5_length} ${link_5_height}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint
+    name="robot_joint5"
+    type="revolute">
+    <origin
+      xyz="0 0 ${link_4_height}"
+      rpy="0 0 0" />
+    <parent
+      link="robot_link4" />
+    <child
+      link="robot_link5" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.570796327"
+      upper="1.570796327"
+      effort="5"
+      velocity="1" />
+    <!-- <dynamics damping="10.0" friction="10.0"/> -->
+  </joint>
+
+  <link name="robot_link6" />
+
+  <joint
+    name="robot_joint6"
+    type="revolute">
+    <origin
+      xyz="0 0 ${link_5_height}"
+      rpy="0 0 0" />
+    <parent
+      link="robot_link5" />
+    <child
+      link="robot_link6" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3"
+      upper="3"
+      effort="5"
+      velocity="1" />
+    <!-- <dynamics damping="10.0" friction="10.0"/> -->
+  </joint>
+
+  <link name="robot_link7" />
+  <joint name="robot_joint7" type="fixed">
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <parent link="robot_link6" />
+      <child link="robot_link7" />
+      <axis xyz="0 0 0" />
+  </joint>
+
+
+  <link
+    name="robot_hand">
+    <xacro:inertial_box mass="0.000151743" x="${hand_width}" y="${hand_length}" z="${hand_height}">
+        <origin xyz="0 0 ${hand_height/2}" rpy="0 0 0"/>
+    </xacro:inertial_box>
+    <visual>
+      <origin
+        xyz="0 0 ${hand_height/2.0}"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="${hand_width} ${hand_length} ${hand_height}"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 ${hand_height/2.0}"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="${hand_width} ${hand_length} ${hand_height}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint
+    name="robot_hand_joint"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 1.570796327" />
+    <parent
+      link="robot_link7" />
+    <child
+      link="robot_hand" />
+  </joint>
+
+  <link name="robot_camera" />
+  <joint name="robot_camera_joint" type="fixed">
+      <origin rpy="0 0 1.570796327" xyz="0.0645 0 0.0685" />
+      <parent link="robot_hand" />
+      <child link="robot_camera" />
+      <axis xyz="0 0 0" />
+  </joint>
+
+  <link
+    name="Gripper_Servo_Gear">
+    <xacro:inertial_box mass="0.000001436" x="${gripper_servo_gear_width}" y="${gripper_servo_gear_length}" z="${gripper_servo_gear_height}">
+        <origin xyz="0 0 ${gripper_servo_gear_height/2}" rpy="0 0 0"/>
+    </xacro:inertial_box>
+    <visual>
+      <origin
+        xyz="0 0 ${gripper_servo_gear_height/2.0}"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="${gripper_servo_gear_width} ${gripper_servo_gear_length} ${gripper_servo_gear_height}"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.9098 0.44314 0.031373 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 ${gripper_servo_gear_height/2.0}"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="${gripper_servo_gear_width} ${gripper_servo_gear_length} ${gripper_servo_gear_height}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint
+    name="robot_finger_joint1"
+    type="revolute">
+    <origin
+      xyz="0 0.014 0.022"
+      rpy="0 0 0" />
+    <parent
+      link="robot_hand" />
+    <child
+      link="Gripper_Servo_Gear" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.5707"
+      upper="0"
+      effort="5"
+      velocity="1" />
+    <!-- <dynamics damping="10.0" friction="10.0"/> -->
+  </joint>
+
+  <link
+    name="robot_rightfinger">
+    <xacro:inertial_box mass="0.00002646" x="${tip_gripper_servo_width}" y="${tip_gripper_servo_length}" z="${tip_gripper_servo_height}">
+        <origin xyz="0 0.003 ${tip_gripper_servo_height/2.0}" rpy="0 0 0"/>
+    </xacro:inertial_box>
+    <visual>
+      <origin
+        xyz="0 -0.003 ${tip_gripper_servo_height/2.0}"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="${tip_gripper_servo_width} ${tip_gripper_servo_length} ${tip_gripper_servo_height}"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0 1 0 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 -0.003 ${tip_gripper_servo_height/2.0}"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="${tip_gripper_servo_width} ${tip_gripper_servo_length} ${tip_gripper_servo_height}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint
+    name="Tip_Gripper_Servo_Joint"
+    type="revolute">
+    <origin
+      xyz="0 0 0.04"
+      rpy="0 0 0" />
+    <parent
+      link="Gripper_Servo_Gear" />
+    <child
+      link="robot_rightfinger" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.5707"
+      upper="1.5707"
+      effort="5"
+      velocity="1" />
+    <mimic joint="robot_finger_joint1" multiplier="-1" offset="0"/> 
+    <!-- <dynamics damping="10.0" friction="10.0"/> -->
+  </joint>
+
+  <link
+    name="Gripper_Idol_Gear">
+    <xacro:inertial_box mass="0.000001436" x="${gripper_idol_gear_width}" y="${gripper_idol_gear_length}" z="${gripper_idol_gear_height}">
+        <origin xyz="0 0.0 ${gripper_idol_gear_height/2.0}" rpy="0 0 0"/>
+    </xacro:inertial_box>
+    <visual>
+      <origin
+        xyz="0 0 ${gripper_idol_gear_height/2.0}"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="${gripper_idol_gear_width} ${gripper_idol_gear_length} ${gripper_idol_gear_height}"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.058824 0.64706 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 ${gripper_idol_gear_height/2.0}"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="${gripper_idol_gear_width} ${gripper_idol_gear_length} ${gripper_idol_gear_height}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint
+    name="robot_finger_joint2"
+    type="revolute">
+    <origin
+      xyz="0 -0.014 0.022"
+      rpy="0 0 0" />
+    <parent
+      link="robot_hand" />
+    <child
+      link="Gripper_Idol_Gear" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.5707"
+      upper="1.5707"
+      effort="5"
+      velocity="1" />
+      <mimic joint="robot_finger_joint1" multiplier="-1"/>
+    <!-- <dynamics damping="10.0" friction="10.0"/> -->
+  </joint>
+
+  <link
+    name="robot_leftfinger">
+    <xacro:inertial_box mass="0.00002646" x="${tip_gripper_idol_width}" y="${tip_gripper_idol_length}" z="${tip_gripper_idol_height}">
+        <origin xyz="0 0.0 ${tip_gripper_idol_height/2.0}" rpy="0 0 0"/>
+    </xacro:inertial_box>
+    <visual>
+      <origin
+        xyz="0 0.003 ${tip_gripper_idol_height/2.0}"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="${tip_gripper_idol_width} ${tip_gripper_idol_length} ${tip_gripper_idol_height}"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 0 0 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0.003 ${tip_gripper_idol_height/2.0}"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="${tip_gripper_idol_width} ${tip_gripper_idol_length} ${tip_gripper_idol_height}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint
+    name="Tip_Gripper_Idol_Joint"
+    type="revolute">
+    <origin
+      xyz="0 0 0.04"
+      rpy="0 0 0" />
+    <parent
+      link="Gripper_Idol_Gear" />
+    <child
+      link="robot_leftfinger" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.5707"
+      upper="1.5707"
+      effort="5"
+      velocity="1" />
+    <mimic joint="robot_finger_joint1" multiplier="1" offset="0"/>
+    <!-- <dynamics damping="10.0" friction="10.0"/> -->
+  </joint>
+
+  <link
+    name="Pivot_Arm_Gripper_Servo">
+    <xacro:inertial_box mass="0.000001436" x="${pivot_arm_gripper_servo_width}" y="${pivot_arm_gripper_servo_length}" z="${pivot_arm_gripper_servo_height}">
+        <origin xyz="0 0.0 ${pivot_arm_gripper_servo_height/2.0}" rpy="0 0 0"/>
+    </xacro:inertial_box>
+    <visual>
+      <origin
+        xyz="0 0 ${pivot_arm_gripper_servo_height/2.0}"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="${pivot_arm_gripper_servo_width} ${pivot_arm_gripper_servo_length} ${pivot_arm_gripper_servo_height}"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 ${pivot_arm_gripper_servo_height/2.0}"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="${pivot_arm_gripper_servo_width} ${pivot_arm_gripper_servo_length} ${pivot_arm_gripper_servo_height}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint
+    name="Pivot_Arm_Gripper_Servo_Joint"
+    type="revolute">
+    <origin
+      xyz="0 0.007 0.0415"
+      rpy="0 0 0" />
+    <parent
+      link="robot_hand" />
+    <child
+      link="Pivot_Arm_Gripper_Servo" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.5707"
+      upper="1.5707"
+      effort="5"
+      velocity="1" />
+    <mimic joint="robot_finger_joint1" multiplier="1" offset="0"/> 
+    <!-- <dynamics damping="10.0" friction="10.0"/> -->
+  </joint>
+
+  <link
+    name="Pivot_Arm_Gripper_Idol">
+    <xacro:inertial_box mass="0.000001436" x="${pivot_arm_gripper_idol_width}" y="${pivot_arm_gripper_idol_length}" z="${pivot_arm_gripper_idol_height}">
+        <origin xyz="0 0.0 ${pivot_arm_gripper_idol_height/2.0}" rpy="0 0 0"/>
+    </xacro:inertial_box>
+    <visual>
+      <origin
+        xyz="0 0 ${pivot_arm_gripper_idol_height/2.0}"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="${pivot_arm_gripper_idol_width} ${pivot_arm_gripper_idol_length} ${pivot_arm_gripper_idol_height}"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 ${pivot_arm_gripper_idol_height/2.0}"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="${pivot_arm_gripper_idol_width} ${pivot_arm_gripper_idol_length} ${pivot_arm_gripper_idol_height}"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint
+    name="Pivot_Arm_Gripper_Idol_Joint"
+    type="revolute">
+    <origin
+      xyz="0 -0.007 0.0415"
+      rpy="0 0 0" />
+    <parent
+      link="robot_hand" />
+    <child
+      link="Pivot_Arm_Gripper_Idol" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.5707"
+      upper="1.5707"
+      effort="5"
+      velocity="1" />
+    <mimic joint="robot_finger_joint1" multiplier="-1" offset="0"/> 
+    <!-- <dynamics damping="10.0" friction="10.0"/> -->
+  </joint>
+
+  <gazebo reference="chassis">
+      <gravity>1</gravity>
+      <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <gazebo reference="left_wheel">
+      <gravity>1</gravity>
+      <material>Gazebo/Blue</material>
+  </gazebo>
+
+  <gazebo reference="right_wheel">
+      <gravity>1</gravity>
+      <material>Gazebo/Blue</material>
+  </gazebo>
+
+  <gazebo reference="caster_wheel">
+      <gravity>1</gravity>
+      <material>Gazebo/White</material>
+      <mu1 value="0.001"/>
+      <mu2 value="0.001"/>
+  </gazebo>
+
+  <gazebo reference="caster_wheel2">
+      <gravity>1</gravity>
+      <material>Gazebo/White</material>
+      <mu1 value="0.001"/>
+      <mu2 value="0.001"/>
+  </gazebo>
+
+  <gazebo reference="robot_link0">
+    <gravity>0</gravity>
+    <!-- <turnGravityOff>true</turnGravityOff> -->
+  </gazebo>
+  <gazebo reference="robot_link1">
+    <gravity>0</gravity>
+    <!-- <turnGravityOff>true</turnGravityOff> -->
+  </gazebo>
+  <gazebo reference="robot_link2">
+    <gravity>0</gravity>
+    <!-- <turnGravityOff>true</turnGravityOff> -->
+  </gazebo>
+  <gazebo reference="robot_link3">
+    <gravity>0</gravity>
+    <!-- <turnGravityOff>true</turnGravityOff> -->
+  </gazebo>
+  <gazebo reference="robot_link4">
+    <gravity>0</gravity>
+    <!-- <turnGravityOff>true</turnGravityOff> -->
+  </gazebo>
+  <gazebo reference="robot_link5">
+    <gravity>0</gravity>
+    <!-- <turnGravityOff>true</turnGravityOff> -->
+  </gazebo>
+  <gazebo reference="robot_hand">
+    <gravity>0</gravity>
+    <!-- <turnGravityOff>true</turnGravityOff> -->
+  </gazebo>
+  <gazebo reference="Gripper_Servo_Gear">
+    <gravity>0</gravity>
+    <!-- <turnGravityOff>true</turnGravityOff> -->
+  </gazebo>
+  <gazebo reference="robot_rightfinger">
+    <gravity>0</gravity>
+    <!-- <turnGravityOff>true</turnGravityOff> -->
+  </gazebo>
+  <gazebo reference="Gripper_Idol_Gear">
+    <gravity>0</gravity>
+    <!-- <turnGravityOff>true</turnGravityOff> -->
+  </gazebo>
+  <gazebo reference="robot_leftfinger">
+    <gravity>0</gravity>
+    <!-- <turnGravityOff>true</turnGravityOff> -->
+  </gazebo>
+  <gazebo reference="Pivot_Arm_Gripper_Servo">
+    <gravity>0</gravity>
+    <!-- <turnGravityOff>true</turnGravityOff> -->
+  </gazebo>
+  <gazebo reference="Pivot_Arm_Gripper_Idol">
+    <gravity>0</gravity>
+    <!-- <turnGravityOff>true</turnGravityOff> -->
+  </gazebo>
+
+</robot>
+
+
+  
